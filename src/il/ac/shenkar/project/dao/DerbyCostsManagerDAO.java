@@ -3,12 +3,17 @@ package il.ac.shenkar.project.dao;
 import il.ac.shenkar.project.CostsManagerDAOException;
 
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 
 public class DerbyCostsManagerDAO implements ICostsManagerDAO {
-    private final String connectionString = "jdbc:derby://localhost:1527/CostManager;create=true";
+ //   private final String connectionString = "jdbc:derby://localhost:1527/CostManager;create=true";
+    private final String connectionString = "jdbc:derby:costs-managerDB;create=true";
+    private String driver;
 
     public DerbyCostsManagerDAO() {
 
@@ -16,15 +21,25 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
         createSchemaAndTables();
     }
 
+//    private void loadDriverClassName() {
+//        try {
+//            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//            System.exit(0);
+//        }
+//    }
     private void loadDriverClassName() {
-        try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-        } catch (ClassNotFoundException e) {
+        Properties properties = new Properties();
+        String filePath = "./src/database.properties"; //Actual path driverClassName
+        try (FileInputStream inputStream = new FileInputStream(filePath)) {
+            properties.load(inputStream);
+             driver = properties.getProperty("driverClassName");
+        } catch (IOException e) {
             e.printStackTrace();
             System.exit(0);
         }
     }
-
     private void createSchemaAndTables() {
         Connection connection = null;
         Statement statement = null;
@@ -39,11 +54,13 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
             rs = dbm.getTables(null, null, "CATEGORIES", null);
             if (!rs.next()) {
                 // Table does not exist, create it
-                statement.execute("""
+                // Table does not exist, create it
+                                statement.execute("""
                         CREATE TABLE categories (
                         id INTEGER GENERATED ALWAYS AS IDENTITY,
                         name VARCHAR(255),
-                        PRIMARY KEY (id)))
+                        PRIMARY KEY (id)
+                        )
                 """);
                 // Insert data into the categories table
                 statement.execute("INSERT INTO categories (name) VALUES ('Food')");
