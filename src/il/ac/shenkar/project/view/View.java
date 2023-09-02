@@ -158,11 +158,11 @@ public class View implements IView {
         titlePanel.setBackground(Color.LIGHT_GRAY); // For example, you can choose any color you prefer
         // You can set background colors for other components as needed
         mainPanel.setLayout(boxlayout);
-        JLabel titleLabel = new JLabel("<html><span style='color: blue;'>Costs Manager</span></html>", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("<html><center><span style='color: blue;'>Costs Manager</span></center></html>", SwingConstants.CENTER);
         titleLabel.setFont(titleLabel.getFont().deriveFont(30.0F));
         titlePanel.add(titleLabel);
         mainPanel.add(titlePanel);
-        mainPanel.add(Box.createVerticalStrut(10));
+        mainPanel.add(Box.createVerticalStrut(1));
 
         // setup cost panel and its elements
         costPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -184,13 +184,15 @@ public class View implements IView {
         costPanel.add(costDescriptionLabel);
         costPanel.add(costDescriptionTF);
         costPanel.add(costDateLabel);
+        costDateDC.setPreferredSize(new Dimension(130, costDateDC.getPreferredSize().height));
+
         costPanel.add(costDateDC);
         costPanel.add(costSubmitBtn);
         costSubmitBtn.addActionListener(listener);
         costPanel.add(Box.createHorizontalStrut(10));
         mainPanel.add(costPanel);
         // spacer
-        mainPanel.add(Box.createVerticalStrut(25));
+        mainPanel.add(Box.createVerticalStrut(1));
 
         // setup category panel and its elements
         categoryPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -203,7 +205,7 @@ public class View implements IView {
         categorySubmitBtn.addActionListener(listener);
         mainPanel.add(categoryPanel);
         // spacer
-        mainPanel.add(Box.createVerticalStrut(25));
+        mainPanel.add(Box.createVerticalStrut(1));
 
         // setup report panel and its elements
         BoxLayout reportboxlayout = new BoxLayout(reportWrapper, BoxLayout.Y_AXIS);
@@ -212,11 +214,15 @@ public class View implements IView {
         TitledBorder costsPanelBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "Costs Report");
         costsPanelBorder.setTitleColor(Color.BLUE);
         reportPanel.setBorder(costsPanelBorder);
+// Set the preferred size with the desired width and the default height
+        reportFromDC.setPreferredSize(new Dimension(130, reportFromDC.getPreferredSize().height));
         reportPanel.add(reportFromLabel);
         reportPanel.add(reportFromDC);
+        reportToDC.setPreferredSize(new Dimension(130, reportToDC.getPreferredSize().height));
         reportPanel.add(reportToLabel);
         reportPanel.add(reportToDC);
         reportPanel.add(reportSubmitBtn);
+
         reportSubmitBtn.addActionListener(listener);
         reportWrapper.add(reportPanel);
         reportWrapper.add(reportTASP);
@@ -252,23 +258,21 @@ public class View implements IView {
      * @param costs
      */
     private void updateReport(List<Cost> costs) {
-        // print costs report where each line is: [date] [category] cost currency => description.
-        StringBuffer report = new StringBuffer();
+        // Create a table header
+        String table = "Date\tCategory\tCost\tCurrency\tDescription\n\n";
+
+        // Populate the table with cost data
         for (Cost cost : costs) {
-            report.append("[")
-                    .append(cost.getDate())
-                    .append("] [")
-                    .append(cost.getCategoryName())
-                    .append("] ")
-                    .append(cost.getSum())
-                    .append(" ")
-                    .append(cost.getCurrency())
-                    .append(" => ")
-                    .append(cost.getDescription())
-                    .append("\n");
+            table += cost.getDate() + "\t" +
+                    cost.getCategoryName() + "\t" +
+                    cost.getSum() + "\t" +
+                    cost.getCurrency() + "\t" +
+                    cost.getDescription() + "\n";
         }
-        reportTA.setText(report.toString());
+
+        reportTA.setText(table);
     }
+
     /**
      * set the costs in the view
      * @param costs
@@ -342,49 +346,88 @@ public class View implements IView {
     }
 
 
-
     class ButtonsListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
-
             Object source = e.getSource();
 
             if (source == costSubmitBtn) {
-                // add an action listener for adding a new cost
-                String categoryName = (String) costCategoryCB.getSelectedItem();
-                Float sum = 0F;
-                try {
-                    sum = Float.parseFloat(costSumTF.getText());
-                } catch (NumberFormatException err) {
-                    err.printStackTrace();
-                    displayMSG("Sum must be a float number.","ERROR", JOptionPane.ERROR_MESSAGE);
-                }
-                if (categoryName == null) {
-                    displayMSG("Must select a category.","ERROR", JOptionPane.ERROR_MESSAGE);
-                }
-                Calendar calendar = new GregorianCalendar();
-                calendar.setTime(costDateDC.getDate());
-
-                vm.addCost(sum, (String)costCurrencyCB.getSelectedItem(), categoryName, costDescriptionTF.getText(), new Date(calendar.getTimeInMillis()));
+                handleCostSubmitAction();
             } else if (source == categorySubmitBtn) {
-                // add an action listener to add a new category
-                String name = categoryNameTF.getText();
-                if(name == null || name.isEmpty()) {
-                    displayMSG("Category name can't be empty.","ERROR", JOptionPane.ERROR_MESSAGE);
-                }
-                vm.addCategory(name);
+                handleCategorySubmitAction();
             } else if (source == reportSubmitBtn) {
-                // add an action listener to list a costs report
-                Calendar startCalendar = new GregorianCalendar();
-                Calendar endCalendar = new GregorianCalendar();
-                startCalendar.setTime(reportFromDC.getDate());
-                endCalendar.setTime(reportToDC.getDate());
-                vm.getCosts(new Date(startCalendar.getTimeInMillis()), new Date(endCalendar.getTimeInMillis()));
+                handleReportSubmitAction();
+            }
+        }
+
+        private void handleCostSubmitAction() {
+            String categoryName = (String) costCategoryCB.getSelectedItem();
+            String sumText = costSumTF.getText();
+            String description = costDescriptionTF.getText();
+            Float sum = 0F;
+
+            if (categoryName == null || categoryName.isEmpty()) {
+                displayMSG("Must select a category.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
+            if (sumText.isEmpty()) {
+                displayMSG("Sum cannot be empty.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            try {
+                sum = Float.parseFloat(sumText);
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(costDateDC.getDate());
+                vm.addCost(sum, (String) costCurrencyCB.getSelectedItem(), categoryName, description, new Date(calendar.getTimeInMillis()));
+            } catch (NumberFormatException err) {
+                err.printStackTrace();
+                displayMSG("Sum must be a float number.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
+
+        private void handleCategorySubmitAction() {
+            String name = categoryNameTF.getText();
+
+            if (name == null || name.isEmpty()) {
+                displayMSG("Category name can't be empty.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            vm.addCategory(name);
+        }
+
+//        private void handleReportSubmitAction() {
+//            Calendar startCalendar = new GregorianCalendar();
+//            Calendar endCalendar = new GregorianCalendar();
+//            startCalendar.setTime(reportFromDC.getDate());
+//            endCalendar.setTime(reportToDC.getDate());
+//
+//            if (startCalendar == null || endCalendar == null) {
+//                displayMSG("Date can't be empty.", "ERROR", JOptionPane.ERROR_MESSAGE);
+//                return;
+//            }
+//            vm.getCosts(new Date(startCalendar.getTimeInMillis()), new Date(endCalendar.getTimeInMillis()));
+//        }
+        private void handleReportSubmitAction() {
+            try {
+                java.sql.Date startDate = new java.sql.Date(reportFromDC.getDate().getTime());
+                java.sql.Date endDate = new java.sql.Date(reportToDC.getDate().getTime());
+
+                // Check if either startDate or endDate is null
+                if (startDate == null || endDate == null) {
+                    throw new NullPointerException("Both start and end dates must be selected.");
+                }
+
+                // Proceed with vm.getCosts(startDate, endDate);
+                vm.getCosts(startDate, endDate);
+            } catch (NullPointerException e) {
+                displayMSG("Date can't be empty.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
 
     }
 }

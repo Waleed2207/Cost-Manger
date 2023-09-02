@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Fri Sep 01 21:15:09 IDT 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-018a-51f4-c316-00000f8ae1b0 
+Sat Sep 02 15:18:06 IDT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-018a-55d4-3802-00000f8ae1b0 
 on database directory /Users/waleedjohjah/IdeaProjects/CostManager/costs-managerDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a 
 Loaded from file:/Users/waleedjohjah/Downloads/db-derby-10.16.1.1-bin/lib/derby.jar
 java.vendor=Oracle Corporation
