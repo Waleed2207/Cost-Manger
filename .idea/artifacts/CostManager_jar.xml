@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CostManager:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CostManager_jar</output-path>
+    <root id="archive" name="CostManager.jar">
+      <element id="module-output" name="CostManager" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/db-derby-10.16.1.1-bin/lib/derbytools.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/db-derby-10.16.1.1-bin/lib/derby.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/db-derby-10.16.1.1-bin/lib/derbyrun.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/db-derby-10.16.1.1-bin/lib/derbyshared.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jcalendar-1.4/lib/jcalendar-1.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
