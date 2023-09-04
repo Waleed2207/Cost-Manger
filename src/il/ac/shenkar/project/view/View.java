@@ -1,8 +1,8 @@
 package il.ac.shenkar.project.view;
 
 import com.toedter.calendar.JDateChooser;
-import il.ac.shenkar.project.dao.Category;
-import il.ac.shenkar.project.dao.Cost;
+import il.ac.shenkar.project.model.Category;
+import il.ac.shenkar.project.model.Cost;
 import il.ac.shenkar.project.viewmodel.IViewModel;
 
 import javax.swing.*;
@@ -158,17 +158,29 @@ public class View implements IView {
         titlePanel.setBackground(Color.LIGHT_GRAY); // For example, you can choose any color you prefer
         // You can set background colors for other components as needed
         mainPanel.setLayout(boxlayout);
-        JLabel titleLabel = new JLabel("<html><center><span style='color: blue;'>Costs Manager</span></center></html>", SwingConstants.CENTER);
-        titleLabel.setFont(titleLabel.getFont().deriveFont(30.0F));
+
+        // Assuming you have an ImageIcon object named 'icon' representing your desired icon
+        ImageIcon icon = new ImageIcon("./budget.png"); //Actual path to your icon image file
+
+        JLabel titleLabel = new JLabel("<html><font color='#2C4F87'><b>Cost Manager</b></font></html>", SwingConstants.LEFT);
+        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 35.0F));
+        titleLabel.setForeground(Color.BLUE); // Set the text color to blue
+        // Set the icon for the titleLabel
+        titleLabel.setIcon(icon);
+
         titlePanel.add(titleLabel);
+        // Set the preferred size of titlePanel to a height of 1 pixel
+        titlePanel.setPreferredSize(new Dimension(titlePanel.getPreferredSize().width, 80));
         mainPanel.add(titlePanel);
         mainPanel.add(Box.createVerticalStrut(1));
 
         // setup cost panel and its elements
         costPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        costPanel.setPreferredSize(new Dimension(costPanel.getPreferredSize().width, 80)); // Set the height to 80 pixels
+
         TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "New Cost");
         // Set the color of the title text
-        titledBorder.setTitleColor(Color.BLUE);
+        titledBorder.setTitleColor(Color.decode("#142B4E")); // Set the title color using Color.decode
         // Set the custom TitledBorder as the border for costPanel
         costPanel.setBorder(titledBorder);
         costPanel.add(costSumLabel);
@@ -197,7 +209,7 @@ public class View implements IView {
         // setup category panel and its elements
         categoryPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         TitledBorder categoryPanelBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "New Category");
-        categoryPanelBorder.setTitleColor(Color.BLUE);
+        categoryPanelBorder.setTitleColor(Color.decode("#142B4E")); // Set the title color using Color.decode
         categoryPanel.setBorder(categoryPanelBorder);
         categoryPanel.add(categoryNameLabel);
         categoryPanel.add(categoryNameTF);
@@ -211,10 +223,11 @@ public class View implements IView {
         BoxLayout reportboxlayout = new BoxLayout(reportWrapper, BoxLayout.Y_AXIS);
         reportWrapper.setLayout(reportboxlayout);
         categoryPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        categoryPanel.setPreferredSize(new Dimension(categoryPanel.getPreferredSize().width, 70)); // Set the height to 400 pixels
         TitledBorder costsPanelBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "Costs Report");
-        costsPanelBorder.setTitleColor(Color.BLUE);
+        costsPanelBorder.setTitleColor(Color.decode("#142B4E")); // Set the title color using Color.decode
         reportPanel.setBorder(costsPanelBorder);
-// Set the preferred size with the desired width and the default height
+       // Set the preferred size with the desired width and the default height
         reportFromDC.setPreferredSize(new Dimension(130, reportFromDC.getPreferredSize().height));
         reportPanel.add(reportFromLabel);
         reportPanel.add(reportFromDC);
@@ -241,7 +254,7 @@ public class View implements IView {
         mainFrame.pack();
         // Define the desired width and height
         int frameWidth = 800; // Adjust this to your preferred width
-        int frameHeight = 600; // Adjust this to your preferred height
+        int frameHeight = 800; // Adjust this to your preferred height
 
         mainFrame.setSize(frameWidth, frameHeight);
         // Center the frame on the screen (optional)
@@ -373,7 +386,7 @@ public class View implements IView {
             }
 
             if (sumText.isEmpty()) {
-                displayMSG("Sum cannot be empty.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                displayMSG("Sum cannot be empty.", "ERROR", JOptionPane.CANCEL_OPTION);
                 return;
             }
 
@@ -392,7 +405,7 @@ public class View implements IView {
             String name = categoryNameTF.getText();
 
             if (name == null || name.isEmpty()) {
-                displayMSG("Category name can't be empty.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                displayMSG("Category name can't be empty.", "ERROR", JOptionPane.CANCEL_OPTION);
                 return;
             }
 
@@ -424,7 +437,7 @@ public class View implements IView {
                 // Proceed with vm.getCosts(startDate, endDate);
                 vm.getCosts(startDate, endDate);
             } catch (NullPointerException e) {
-                displayMSG("Date can't be empty.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                displayMSG("Date can't be empty.", "ERROR", JOptionPane.CANCEL_OPTION);
             }
         }
 

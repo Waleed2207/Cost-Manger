@@ -1,4 +1,4 @@
-package il.ac.shenkar.project.dao;
+package il.ac.shenkar.project.model;
 
 /**
  * Category class to represent category object in database

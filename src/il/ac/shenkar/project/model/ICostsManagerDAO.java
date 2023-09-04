@@ -1,4 +1,4 @@
-package il.ac.shenkar.project.dao;
+package il.ac.shenkar.project.model;
 
 import il.ac.shenkar.project.CostsManagerDAOException;
 

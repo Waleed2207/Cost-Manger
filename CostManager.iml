@@ -8,37 +8,37 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="jcalendar-1.4" level="project" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/db-derby-10.16.1.1-bin/lib/derby.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/derby.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/db-derby-10.16.1.1-bin/lib/derbyshared.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/derbyrun.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/db-derby-10.16.1.1-bin/lib/derbyrun.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/derbyshared.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/db-derby-10.16.1.1-bin/lib/derbytools.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/derbytools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -1,51 +1,52 @@
 package il.ac.shenkar.project.view;
 
-import il.ac.shenkar.project.dao.Category;
-import il.ac.shenkar.project.dao.Cost;
+import il.ac.shenkar.project.model.Category;
+import il.ac.shenkar.project.model.Cost;
 import il.ac.shenkar.project.viewmodel.IViewModel;
 
 import java.util.List;
 
 /**
- * View interface to allow main and viewmodel to interact with the view
+ * View interface to allow main and viewmodel to interact with the view.
  */
 public interface IView {
     /**
-     * set the viewmodel reference
-     * @param vm
+     * Sets the viewmodel reference.
+     *
+     * @param vm The ViewModel instance to set.
      */
-    public void setViewModel(IViewModel vm);
+    void setViewModel(IViewModel vm);
 
     /**
-     * start the interface
+     * Starts the interface.
      */
-    public void start();
+    void start();
 
     /**
-     * set the costs in the view
-     * @param costs
+     * Sets the costs in the view.
+     *
+     * @param costs The list of costs to set.
      */
-    public void setCosts(List<Cost> costs);
+    void setCosts(List<Cost> costs);
 
     /**
-     * set the categories in the view
-     * @param categories
+     * Sets the categories in the view.
+     *
+     * @param categories The list of categories to set.
      */
-    public void setCategories(List<Category> categories);
+    void setCategories(List<Category> categories);
 
     /**
-     * sync the categories in the view with the database
+     * Syncs the categories in the view with the database.
      */
-    public void syncCategories();
+    void syncCategories();
 
     /**
-     * display a message to the user
-     * @param msg
-     * @param type
-     * @param msgType
+     * Displays a message to the user.
+     *
+     * @param msg      The message to display.
+     * @param type     The type of message (e.g., information, warning).
+     * @param msgType  The message type (e.g., dialog, notification).
      */
-    public void displayMSG(String msg , String type ,int msgType);
+    void displayMSG(String msg, String type, int msgType);
 }
-
-
-

@@ -1,8 +1,6 @@
 package il.ac.shenkar.project.model;
 
 import il.ac.shenkar.project.CostsManagerDAOException;
-import il.ac.shenkar.project.dao.Category;
-import il.ac.shenkar.project.dao.Cost;
 
 import java.sql.Date;
 import java.util.List;

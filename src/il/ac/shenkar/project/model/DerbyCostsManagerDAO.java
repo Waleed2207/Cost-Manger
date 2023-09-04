@@ -1,4 +1,4 @@
-package il.ac.shenkar.project.dao;
+package il.ac.shenkar.project.model;
 
 import il.ac.shenkar.project.CostsManagerDAOException;
 
@@ -30,17 +30,6 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
             System.exit(0);
         }
     }
-//    private void loadDriverClassName() {
-//        Properties properties = new Properties();
-//        String filePath = "./src/database.properties"; //Actual path driverClassName
-//        try (FileInputStream inputStream = new FileInputStream(filePath)) {
-//            properties.load(inputStream);
-//             driver = properties.getProperty("driverClassName");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            System.exit(0);
-//        }
-//    }
     private void createSchemaAndTables() {
         Connection connection = null;
         Statement statement = null;
