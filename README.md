@@ -1,5 +1,5 @@
 # Cost-Manger
-###Cost Manager ### is a Java-based desktop application utilizing the DerbyDB relational database. It follows the MVVM architecture,
+#Cost Manager# is a Java-based desktop application utilizing the DerbyDB relational database. It follows the MVVM architecture,
 comprising four packages: the main package essential for running the application, the model package housing model classes,
 the view package for graphical interfaces, and the viewModel package containing controllers for database interaction.
 
