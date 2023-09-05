@@ -10,15 +10,14 @@ import il.ac.shenkar.project.viewmodel.ViewModel;
 import javax.swing.*;
 
 /**
- * main application class to run the main
+ * Main application class to run the main
  */
 public class Main {
     /**
-     * main function of the application
+     * Main function of the application
      * @param args
-     * @throws ClassNotFoundException
      */
-    public static void main(String[] args) throws ClassNotFoundException, CostsManagerDAOException {
+    public static void main(String[] args) {
         try{
             IModel model = new Model();
             IViewModel vm = new ViewModel();
@@ -26,9 +25,9 @@ public class Main {
             SwingUtilities.invokeLater(() -> {
                 IView view = new View();
                 view.start();
-                // set the viewmodel in the view
+                // set the ViewModel in the view
                 view.setViewModel(vm);
-                // set the model and view in viewmodel
+                // set the model and view in ViewModel
                 vm.setModel(model);
                 vm.setView(view);
                 // sync the categories in the view with the categories in the database

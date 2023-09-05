@@ -2,34 +2,49 @@ package il.ac.shenkar.project.model;
 
 import il.ac.shenkar.project.CostsManagerDAOException;
 
-
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Database access object implemented for Derby Database.
+ */
+
 public class DerbyCostsManagerDAO implements ICostsManagerDAO {
  //   private final String connectionString = "jdbc:derby://localhost:1527/CostManager;create=true";
+    /**
+     *  JDBC connection string for Derby database
+     */
     private final String connectionString = "jdbc:derby:Costs-ManagerDB;create=true";
-    private static final Logger logger = Logger.getLogger(DerbyCostsManagerDAO.class.getName());
+        private static final Logger logger = Logger.getLogger(DerbyCostsManagerDAO.class.getName());
 
-    private String driver;
 
+    /**
+     * Constructor for DerbyCostsManagerDAO.
+     * Initializes the database driver and creates the necessary schema and tables if they don't exist.
+     */
     public DerbyCostsManagerDAO() {
 
         loadDriverClassName();
         createSchemaAndTables();
     }
-
-    private void loadDriverClassName() {
+    /**
+     * Load the Derby database driver class.
+     */
+    private void loadDriverClassName(){
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+            Class.forName(driver);
         } catch (ClassNotFoundException e) {
             logger.log(Level.SEVERE, "Failed to load database driver", e);
             System.exit(0);
         }
     }
+    /**
+     * Create the necessary schema and tables if they don't exist.
+     */
     private void createSchemaAndTables() {
         Connection connection = null;
         Statement statement = null;
@@ -95,7 +110,12 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
         }
     }
 
-
+    /**
+     * Adds a new category to the database.
+     *
+     * @param category The category to add.
+     * @throws CostsManagerDAOException If there is an error adding the category.
+     */
     @Override
     public void addCategory(Category category) throws CostsManagerDAOException {
         try(Connection connection = DriverManager.getConnection(connectionString);
@@ -110,7 +130,12 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
             throw new CostsManagerDAOException("Error connecting to database", e);
         }
     }
-
+    /**
+     * Retrieves a list of all categories from the database.
+     *
+     * @return A list of categories.
+     * @throws CostsManagerDAOException If there is an error retrieving the categories.
+     */
     @Override
     public List<Category> getCategories() throws CostsManagerDAOException {
         List<Category> list = new LinkedList<>();
@@ -125,7 +150,13 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
         }
         return list;
     }
-
+    /**
+     * Retrieves a category by its name from the database.
+     *
+     * @param name The name of the category to retrieve.
+     * @return The retrieved category or null if not found.
+     * @throws CostsManagerDAOException If there is an error retrieving the category.
+     */
     @Override
     public Category getCategoryByName(String name) throws CostsManagerDAOException {
         Category category = null;
@@ -150,7 +181,12 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
         }
         return category;
     }
-
+    /**
+     * Adds a new cost to the database.
+     *
+     * @param cost The cost to add.
+     * @throws CostsManagerDAOException If there is an error adding the cost.
+     */
     @Override
     public void addCost(Cost cost) throws CostsManagerDAOException {
         try(Connection connection = DriverManager.getConnection(connectionString);
@@ -165,7 +201,14 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
             throw new CostsManagerDAOException("Error connecting to database", e);
         }
     }
-
+    /**
+     * Retrieves a list of costs within a specified date range from the database.
+     *
+     * @param start The start date of the range.
+     * @param end   The end date of the range.
+     * @return A list of costs within the specified date range.
+     * @throws CostsManagerDAOException If there is an error retrieving the costs.
+     */
     @Override
     public List<Cost> getCosts(Date start, Date end) throws CostsManagerDAOException {
         ResultSet rs = null;

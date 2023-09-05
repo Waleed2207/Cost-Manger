@@ -6,46 +6,51 @@ import il.ac.shenkar.project.view.IView;
 import java.sql.Date;
 
 /**
- * viewmodel interface to help view communicate with model
+ * ViewModel interface to facilitate communication between the view and model.
  */
 public interface IViewModel {
     /**
-     * set the model
-     * @param model
+     * Sets the model for the ViewModel.
+     *
+     * @param model The model to set.
      */
-    public void setModel(IModel model);
+    void setModel(IModel model);
 
     /**
-     * set the view
-     * @param view
+     * Sets the view for the ViewModel.
+     *
+     * @param view The view to set.
      */
-    public void setView(IView view);
+    void setView(IView view);
 
     /**
-     * call add category in model
-     * @param name
+     * Calls the method to add a category in the model.
+     *
+     * @param name The name of the category to add.
      */
-    public void addCategory(String name);
+    void addCategory(String name);
 
     /**
-     * call add cost in model
-     * @param sum
-     * @param currency
-     * @param categoryName
-     * @param description
-     * @param date
+     * Calls the method to add a cost in the model.
+     *
+     * @param sum          The cost sum to add.
+     * @param currency     The currency of the cost.
+     * @param categoryName The name of the category for the cost.
+     * @param description  The description of the cost.
+     * @param date         The date of the cost.
      */
-    public void addCost(float sum, String currency, String categoryName, String description, Date date);
+    void addCost(float sum, String currency, String categoryName, String description, Date date);
 
     /**
-     * call get costs in model
-     * @param start
-     * @param end
+     * Calls the method to get costs from the model within a specified date range.
+     *
+     * @param start The start date of the range.
+     * @param end   The end date of the range.
      */
-    public void getCosts(Date start, Date end);
+    void getCosts(Date start, Date end);
 
     /**
-     * call get categories in model
+     * Calls the method to get categories from the model.
      */
-    public void getCategories();
+    void getCategories();
 }

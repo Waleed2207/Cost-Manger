@@ -267,8 +267,9 @@ public class View implements IView {
     }
 
     /**
-     * helper function for setCosts
-     * @param costs
+     * Helper function for setCosts.
+     *
+     * @param costs The list of costs to display.
      */
     private void updateReport(List<Cost> costs) {
         // Create a table header
@@ -287,8 +288,9 @@ public class View implements IView {
     }
 
     /**
-     * set the costs in the view
-     * @param costs
+     * Sets the costs in the view.
+     *
+     * @param costs The list of costs to set.
      */
     @Override
     public void setCosts(List<Cost> costs) {
@@ -303,8 +305,9 @@ public class View implements IView {
     }
 
     /**
-     * helper function for setCategories
-     * @param categories
+     * Helper function for setCategories.
+     *
+     * @param categories The list of categories to display.
      */
     private void updateCategories(List<Category> categories) {
         // update categories in combobox
@@ -317,8 +320,9 @@ public class View implements IView {
         categoryTA.setText(sb.toString());
     }
     /**
-     * set the categories in the view
-     * @param categories
+     * Sets the categories in the view.
+     *
+     * @param categories The list of categories to set.
      */
     @Override
     public void setCategories(List<Category> categories) {
@@ -332,10 +336,11 @@ public class View implements IView {
         }
     }
     /**
-     * display a message to the user
-     * @param msg
-     * @param type
-     * @param msgType
+     * Displays a message to the user.
+     *
+     * @param msg     The message to display.
+     * @param type    The type of message (e.g., information, warning).
+     * @param msgType The message type (e.g., dialog, notification).
      */
     public void displayMSG(String msg , String type ,int msgType){
         // make sure to only execute in the dispatch thread
@@ -351,20 +356,27 @@ public class View implements IView {
 
     }
     /**
-     * sync the categories in the view with the database
+     * Syncs the categories in the view with the database.
      */
     @Override
     public void syncCategories() {
         vm.getCategories();
     }
 
-
+    /**
+     * ActionListener for handling button events
+     */
     class ButtonsListener implements ActionListener {
-
+        /**
+         * Handles button clicks in the user interface.
+         *
+         * @param e The ActionEvent representing the button click event.
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             Object source = e.getSource();
 
+            // Determine which button was clicked and invoke the corresponding action
             if (source == costSubmitBtn) {
                 handleCostSubmitAction();
             } else if (source == categorySubmitBtn) {
@@ -374,26 +386,36 @@ public class View implements IView {
             }
         }
 
+        /**
+         * Handles the action when the "Add Cost" button is clicked.
+         */
         private void handleCostSubmitAction() {
             String categoryName = (String) costCategoryCB.getSelectedItem();
             String sumText = costSumTF.getText();
             String description = costDescriptionTF.getText();
             Float sum = 0F;
 
+            // Check if a category is selected
             if (categoryName == null || categoryName.isEmpty()) {
                 displayMSG("Must select a category.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
+            // Check if the sum field is empty
             if (sumText.isEmpty()) {
                 displayMSG("Sum cannot be empty.", "ERROR", JOptionPane.CANCEL_OPTION);
                 return;
             }
 
             try {
+                // Parse the sum as a float
                 sum = Float.parseFloat(sumText);
+
+                // Get the selected date and time from the calendar
                 Calendar calendar = new GregorianCalendar();
                 calendar.setTime(costDateDC.getDate());
+
+                // Call the ViewModel to add the cost
                 vm.addCost(sum, (String) costCurrencyCB.getSelectedItem(), categoryName, description, new Date(calendar.getTimeInMillis()));
             } catch (NumberFormatException err) {
                 err.printStackTrace();
@@ -401,32 +423,31 @@ public class View implements IView {
             }
         }
 
+        /**
+         * Handles the action when the "Add Category" button is clicked.
+         */
         private void handleCategorySubmitAction() {
             String name = categoryNameTF.getText();
 
+            // Check if the category name is empty
             if (name == null || name.isEmpty()) {
                 displayMSG("Category name can't be empty.", "ERROR", JOptionPane.CANCEL_OPTION);
                 return;
             }
 
+            // Call the ViewModel to add the category
             vm.addCategory(name);
         }
 
-//        private void handleReportSubmitAction() {
-//            Calendar startCalendar = new GregorianCalendar();
-//            Calendar endCalendar = new GregorianCalendar();
-//            startCalendar.setTime(reportFromDC.getDate());
-//            endCalendar.setTime(reportToDC.getDate());
-//
-//            if (startCalendar == null || endCalendar == null) {
-//                displayMSG("Date can't be empty.", "ERROR", JOptionPane.ERROR_MESSAGE);
-//                return;
-//            }
-//            vm.getCosts(new Date(startCalendar.getTimeInMillis()), new Date(endCalendar.getTimeInMillis()));
-//        }
+        /**
+         * Handles the action when the "Show Costs" button is clicked.
+         */
         private void handleReportSubmitAction() {
             try {
+                // Get the selected start date
                 java.sql.Date startDate = new java.sql.Date(reportFromDC.getDate().getTime());
+
+                // Get the selected end date
                 java.sql.Date endDate = new java.sql.Date(reportToDC.getDate().getTime());
 
                 // Check if either startDate or endDate is null
@@ -434,13 +455,12 @@ public class View implements IView {
                     throw new NullPointerException("Both start and end dates must be selected.");
                 }
 
-                // Proceed with vm.getCosts(startDate, endDate);
+                // Proceed with retrieving costs from the ViewModel
                 vm.getCosts(startDate, endDate);
             } catch (NullPointerException e) {
                 displayMSG("Date can't be empty.", "ERROR", JOptionPane.CANCEL_OPTION);
             }
         }
-
-
     }
+
 }

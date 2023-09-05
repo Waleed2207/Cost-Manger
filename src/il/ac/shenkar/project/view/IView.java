@@ -7,37 +7,37 @@ import il.ac.shenkar.project.viewmodel.IViewModel;
 import java.util.List;
 
 /**
- * View interface to allow main and viewmodel to interact with the view.
+ * The View interface defines methods for the user interface to interact with the application.
  */
 public interface IView {
     /**
-     * Sets the viewmodel reference.
+     * Sets the ViewModel reference for the view.
      *
      * @param vm The ViewModel instance to set.
      */
     void setViewModel(IViewModel vm);
 
     /**
-     * Starts the interface.
+     * Starts the user interface.
      */
     void start();
 
     /**
-     * Sets the costs in the view.
+     * Sets the list of costs in the view.
      *
      * @param costs The list of costs to set.
      */
     void setCosts(List<Cost> costs);
 
     /**
-     * Sets the categories in the view.
+     * Sets the list of categories in the view.
      *
      * @param categories The list of categories to set.
      */
     void setCategories(List<Category> categories);
 
     /**
-     * Syncs the categories in the view with the database.
+     * Synchronizes the categories in the view with the database.
      */
     void syncCategories();
 

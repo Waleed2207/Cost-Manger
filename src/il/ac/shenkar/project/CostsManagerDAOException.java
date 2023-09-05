@@ -1,21 +1,24 @@
 package il.ac.shenkar.project;
 
 /**
- * exception class for the project
+ * Custom exception class for the project.
  */
-public class CostsManagerDAOException extends Exception{
+public class CostsManagerDAOException extends Exception {
+
     /**
-     * constructor with only message
-     * @param message
+     * Constructs a new exception with the specified detail message.
+     *
+     * @param message The detail message (which is saved for later retrieval by the getMessage() method).
      */
     public CostsManagerDAOException(String message) {
         super(message);
     }
 
     /**
-     * constructor with message and cause
-     * @param message
-     * @param cause
+     * Constructs a new exception with the specified detail message and cause.
+     *
+     * @param message The detail message (which is saved for later retrieval by the getMessage() method).
+     * @param cause   The cause (which is saved for later retrieval by the getCause() method). (A null value is permitted, and indicates that the cause is nonexistent or unknown.)
      */
     public CostsManagerDAOException(String message, Throwable cause) {
         super(message, cause);

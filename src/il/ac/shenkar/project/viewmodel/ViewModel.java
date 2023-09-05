@@ -13,32 +13,24 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * viewmodel implementation
+ * ViewModel implementation
  */
 public class ViewModel implements IViewModel {
-    /**
-     * model reference
-     */
-    private IModel model;
-    /**
-     * view reference
-     */
-    private IView view;
-    /**
-     * executor service to run each call in a new thread
-     */
-    private ExecutorService service;
+    private IModel model; // Model reference
+    private IView view;   // View reference
+    private ExecutorService service; // Executor service to run tasks in separate threads
 
     /**
-     * constructor to create a fixed thread pool
+     * Constructor to create a fixed thread pool
      */
     public ViewModel() {
         service = Executors.newFixedThreadPool(8);
     }
 
     /**
-     * set the model
-     * @param model
+     * Set the model.
+     *
+     * @param model The model to set.
      */
     @Override
     public void setModel(IModel model) {
@@ -46,8 +38,9 @@ public class ViewModel implements IViewModel {
     }
 
     /**
-     * set the view
-     * @param view
+     * Set the view.
+     *
+     * @param view The view to set.
      */
     @Override
     public void setView(IView view) {
@@ -55,81 +48,81 @@ public class ViewModel implements IViewModel {
     }
 
     /**
-     * call add category in model
-     * @param name
+     * Call the model to add a category.
+     *
+     * @param name The name of the category to add.
      */
     @Override
-    public void addCategory(String name){
-        // submit a thread to handel adding a category
+    public void addCategory(String name) {
+        // Submit a thread to handle adding a category
         service.submit(() -> {
             try {
                 model.addCategory(name);
                 view.syncCategories();
-                view.displayMSG("The category has been added successfully.","INFO", JOptionPane.INFORMATION_MESSAGE);
+                view.displayMSG("The category has been added successfully.", "INFO", JOptionPane.INFORMATION_MESSAGE);
             } catch (CostsManagerDAOException e) {
                 e.printStackTrace();
-                view.displayMSG("Error adding category. make sure that the category doesn't already exist.","ERROR", JOptionPane.ERROR_MESSAGE);
+                view.displayMSG("Error adding category. Make sure that the category doesn't already exist.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
 
     /**
-     * call add cost in model
-     * @param sum
-     * @param currency
-     * @param categoryName
-     * @param description
-     * @param date
+     * Call the model to add a cost.
+     *
+     * @param sum          The cost sum to add.
+     * @param currency     The currency of the cost.
+     * @param categoryName The name of the category for the cost.
+     * @param description  The description of the cost.
+     * @param date         The date of the cost.
      */
     @Override
     public void addCost(float sum, String currency, String categoryName, String description, Date date) {
-        // submit a thread to handel adding a cost
+        // Submit a thread to handle adding a cost
         service.submit(() -> {
             try {
                 model.addCost(sum, currency, categoryName, description, date);
-                view.displayMSG("The cost has been added successfully.","INFO", JOptionPane.INFORMATION_MESSAGE);
+                view.displayMSG("The cost has been added successfully.", "INFO", JOptionPane.INFORMATION_MESSAGE);
             } catch (CostsManagerDAOException e) {
                 e.printStackTrace();
-                view.displayMSG("Error adding cost. Try again!","ERROR", JOptionPane.ERROR_MESSAGE);
-
+                view.displayMSG("Error adding cost. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
 
     /**
-     * call get costs in model
-     * @param start
-     * @param end
+     * Call the model to get costs within a specified date range.
+     *
+     * @param start The start date of the range.
+     * @param end   The end date of the range.
      */
     @Override
     public void getCosts(Date start, Date end) {
-        // submit a thread to get all costs
+        // Submit a thread to get all costs
         service.submit(() -> {
             try {
                 List<Cost> list = model.getCosts(start, end);
                 view.setCosts(list);
             } catch (CostsManagerDAOException e) {
                 e.printStackTrace();
-                view.displayMSG("Error getting costs. Try again!","ERROR", JOptionPane.ERROR_MESSAGE);
-
+                view.displayMSG("Error getting costs. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
 
     /**
-     * call get categories in model
+     * Call the model to get categories.
      */
     @Override
     public void getCategories() {
-        // submit a thread to handel getting all categories
+        // Submit a thread to handle getting all categories
         service.submit(() -> {
             try {
                 List<Category> list = model.getCategories();
                 view.setCategories(list);
             } catch (CostsManagerDAOException e) {
                 e.printStackTrace();
-                view.displayMSG("Error getting categories. Try again!","ERROR", JOptionPane.ERROR_MESSAGE);
-
+                view.displayMSG("Error getting categories. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         });
     }

@@ -7,43 +7,50 @@ import java.sql.Date;
  */
 public class Cost {
     /**
-     * id of the cost
+     * The ID of the cost.
      */
     private int id;
+
     /**
-     * category id of the cost
+     * The category ID of the cost.
      */
     private int categoryId;
+
     /**
-     * category name of the cost
+     * The category name of the cost.
      */
     private String categoryName;
+
     /**
-     * sum of the cost
+     * The sum of the cost.
      */
     private float sum;
+
     /**
-     * currency of the cost
+     * The currency of the cost.
      */
     private String currency;
+
     /**
-     * description of the cost
+     * The description of the cost.
      */
     private String description;
+
     /**
-     * date of the cost
+     * The date of the cost.
      */
     private Date date;
 
     /**
-     * constructor including id if the id is known
-     * @param id
-     * @param categoryId
-     * @param categoryName
-     * @param sum
-     * @param currency
-     * @param description
-     * @param date
+     * Constructs a Cost object with a known ID.
+     *
+     * @param id           The ID of the cost.
+     * @param categoryId   The category ID of the cost.
+     * @param categoryName The category name of the cost.
+     * @param sum          The sum of the cost.
+     * @param currency     The currency of the cost.
+     * @param description  The description of the cost.
+     * @param date         The date of the cost.
      */
     public Cost(int id, int categoryId, String categoryName, float sum, String currency, String description, Date date) {
         setId(id);
@@ -56,12 +63,13 @@ public class Cost {
     }
 
     /**
-     * constructor if the id is unkown
-     * @param categoryId
-     * @param sum
-     * @param currency
-     * @param description
-     * @param date
+     * Constructs a Cost object with an unknown ID.
+     *
+     * @param categoryId  The category ID of the cost.
+     * @param sum         The sum of the cost.
+     * @param currency    The currency of the cost.
+     * @param description The description of the cost.
+     * @param date        The date of the cost.
      */
     public Cost(int categoryId, float sum, String currency, String description, Date date) {
         setCategoryId(categoryId);
@@ -72,112 +80,126 @@ public class Cost {
     }
 
     /**
-     * return the id of the cost
-     * @return
+     * Gets the ID of the cost.
+     *
+     * @return The ID of the cost.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * set the id of the cost
-     * @param id
+     * Sets the ID of the cost.
+     *
+     * @param id The ID of the cost.
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * return the category id of the cost
-     * @return
+     * Gets the category ID of the cost.
+     *
+     * @return The category ID of the cost.
      */
     public int getCategoryId() {
         return categoryId;
     }
 
     /**
-     * set the category id of the cost
-     * @param categoryId
+     * Sets the category ID of the cost.
+     *
+     * @param categoryId The category ID of the cost.
      */
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
     /**
-     * get category name of the cost
-     * @return
+     * Gets the category name of the cost.
+     *
+     * @return The category name of the cost.
      */
     public String getCategoryName() {
         return categoryName;
     }
 
     /**
-     * set category name of the cost
-     * @param categoryName
+     * Sets the category name of the cost.
+     *
+     * @param categoryName The category name of the cost.
      */
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 
     /**
-     * get sum of the cost
-     * @return
+     * Gets the sum of the cost.
+     *
+     * @return The sum of the cost.
      */
     public float getSum() {
         return sum;
     }
 
     /**
-     * set sum of the cost
-     * @param sum
+     * Sets the sum of the cost.
+     *
+     * @param sum The sum of the cost.
      */
     public void setSum(float sum) {
         this.sum = sum;
     }
 
     /**
-     * get description of the cost
-     * @return
+     * Gets the description of the cost.
+     *
+     * @return The description of the cost.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * set description of the cost
-     * @param description
+     * Sets the description of the cost.
+     *
+     * @param description The description of the cost.
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * get date of the cost
-     * @return
+     * Gets the date of the cost.
+     *
+     * @return The date of the cost.
      */
     public Date getDate() {
         return date;
     }
 
     /**
-     * set date of the cost
-     * @param date
+     * Sets the date of the cost.
+     *
+     * @param date The date of the cost.
      */
     public void setDate(Date date) {
         this.date = date;
     }
 
     /**
-     * get currency of the cost
-     * @return
+     * Gets the currency of the cost.
+     *
+     * @return The currency of the cost.
      */
     public String getCurrency() {
         return currency;
     }
 
     /**
-     * set currency of the cost
-     * @param currency
+     * Sets the currency of the cost.
+     *
+     * @param currency The currency of the cost.
      */
     public void setCurrency(String currency) {
         this.currency = currency;

@@ -6,42 +6,44 @@ import java.sql.Date;
 import java.util.List;
 
 /**
- * Model interface
+ * Model interface for interacting with the Costs Manager.
  */
 public interface IModel {
     /**
-     * call get categories from DAO
-     * @return
-     * @throws CostsManagerDAOException
+     * Get a list of categories from the data access object (DAO).
+     *
+     * @return A list of categories.
+     * @throws CostsManagerDAOException If there is an error retrieving the categories.
      */
-    public List<Category> getCategories() throws CostsManagerDAOException;
+    List<Category> getCategories() throws CostsManagerDAOException;
 
     /**
-     * call add category from DAO
-     * @param name
-     * @throws CostsManagerDAOException
+     * Add a new category to the data access object (DAO).
+     *
+     * @param name The name of the category to add.
+     * @throws CostsManagerDAOException If there is an error adding the category.
      */
-    public void addCategory(String name) throws CostsManagerDAOException;
+    void addCategory(String name) throws CostsManagerDAOException;
 
     /**
-     * call get costs from DAO
-     * @param start
-     * @param end
-     * @return
-     * @throws CostsManagerDAOException
+     * Get a list of costs within a specified date range from the data access object (DAO).
+     *
+     * @param start The start date of the range.
+     * @param end   The end date of the range.
+     * @return A list of costs within the specified date range.
+     * @throws CostsManagerDAOException If there is an error retrieving the costs.
      */
-    public List<Cost> getCosts(Date start, Date end) throws CostsManagerDAOException;
+    List<Cost> getCosts(Date start, Date end) throws CostsManagerDAOException;
 
     /**
-     * call add cost from DAO
-     * @param sum
-     * @param currency
-     * @param categoryName
-     * @param description
-     * @param date
-     * @throws CostsManagerDAOException
+     * Add a new cost to the data access object (DAO).
+     *
+     * @param sum          The cost amount.
+     * @param currency     The currency of the cost.
+     * @param categoryName The name of the category for the cost.
+     * @param description  The description of the cost.
+     * @param date         The date of the cost.
+     * @throws CostsManagerDAOException If there is an error adding the cost.
      */
-    public void addCost(float sum, String currency, String categoryName, String description, Date date) throws CostsManagerDAOException;
-
-
+    void addCost(float sum, String currency, String categoryName, String description, Date date) throws CostsManagerDAOException;
 }

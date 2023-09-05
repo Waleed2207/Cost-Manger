@@ -1,22 +1,24 @@
 package il.ac.shenkar.project.model;
 
 /**
- * Category class to represent category object in database
+ * Category class to represent a category object in the database.
  */
 public class Category {
     /**
-     * id of the category
+     * The ID of the category.
      */
     private int id;
+
     /**
-     * name of the category
+     * The name of the category.
      */
     private String name;
 
     /**
-     * constructor with two parameters if id is known
-     * @param id
-     * @param name
+     * Constructs a Category object with a known ID.
+     *
+     * @param id   The ID of the category.
+     * @param name The name of the category.
      */
     public Category(int id, String name) {
         setId(id);
@@ -24,48 +26,54 @@ public class Category {
     }
 
     /**
-     * constructor with one parameter if id is unknown
-     * @param name
+     * Constructs a Category object with an unknown ID.
+     *
+     * @param name The name of the category.
      */
-    public Category( String name) {
+    public Category(String name) {
         setName(name);
     }
 
     /**
-     * return id of the category
-     * @return
+     * Gets the ID of the category.
+     *
+     * @return The ID of the category.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * set the id of the category
-     * @param id
+     * Sets the ID of the category.
+     *
+     * @param id The ID of the category.
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * return name of the category
-     * @return
+     * Gets the name of the category.
+     *
+     * @return The name of the category.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * set the name of the category
-     * @param name
+     * Sets the name of the category.
+     *
+     * @param name The name of the category.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * string representation of the category
-     * @return
+     * Returns a string representation of the category.
+     *
+     * @return A string representation of the category.
      */
     @Override
     public String toString() {
