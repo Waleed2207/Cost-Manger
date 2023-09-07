@@ -160,13 +160,7 @@ public class View implements IView {
         mainPanel.setLayout(boxlayout);
 
         // Assuming you have an ImageIcon object named 'icon' representing your desired icon
-        ImageIcon icon = new ImageIcon("./budget.png"); //Actual path to your icon image file
-
-        JLabel titleLabel = new JLabel("<html><font color='#2C4F87'><b>Cost Manager</b></font></html>", SwingConstants.LEFT);
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 35.0F));
-        titleLabel.setForeground(Color.BLUE); // Set the text color to blue
-        // Set the icon for the titleLabel
-        titleLabel.setIcon(icon);
+        JLabel titleLabel = getjLabel();
 
         titlePanel.add(titleLabel);
         // Set the preferred size of titlePanel to a height of 1 pixel
@@ -265,6 +259,32 @@ public class View implements IView {
         mainFrame.setVisible(true);
 
     }
+
+    /**
+     * Create and return a JLabel with a custom title and an icon.
+     *
+     * @return A JLabel with a custom title and icon.
+     */
+    private static JLabel getjLabel() {
+        // Load the icon from the specified image file path
+        ImageIcon icon = new ImageIcon("./budget.png");
+
+        // Create a JLabel with a custom HTML-formatted title
+        JLabel titleLabel = new JLabel("<html><font color='#2C4F87'><b>Cost Manager</b></font></html>", SwingConstants.LEFT);
+
+        // Set the font and style for the title label
+        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 35.0F));
+
+        // Set the text color to blue for the title label
+        titleLabel.setForeground(Color.BLUE);
+
+        // Set the loaded icon for the titleLabel
+        titleLabel.setIcon(icon);
+
+        // Return the created and configured titleLabel
+        return titleLabel;
+    }
+
 
     /**
      * Helper function for setCosts.
