@@ -429,7 +429,13 @@ public class View implements IView {
 
             // Check if the sum field is empty
             if (sumText.isEmpty()) {
-                displayMSG("Sum cannot be empty.", "ERROR", JOptionPane.CANCEL_OPTION);
+                displayMSG("Sum cannot be empty.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Check if the date is selected
+            if (costDateDC.getDate() == null) {
+                displayMSG("Date must be selected.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -448,6 +454,7 @@ public class View implements IView {
                 displayMSG("Sum must be a float number.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
+
 
         /**
          * Handles the action when the "Add Category" button is clicked.
@@ -498,8 +505,6 @@ public class View implements IView {
                     displayMSG("An unknown error occurred.", "ERROR", JOptionPane.CANCEL_OPTION);
                 }
             }
-
         }
     }
-
 }
