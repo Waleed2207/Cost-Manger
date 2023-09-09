@@ -471,21 +471,34 @@ public class View implements IView {
         private void handleReportSubmitAction() {
             try {
                 // Get the selected start date
-                java.sql.Date startDate = new java.sql.Date(reportFromDC.getDate().getTime());
-
+                java.util.Date startDate = reportFromDC.getDate();
                 // Get the selected end date
-                java.sql.Date endDate = new java.sql.Date(reportToDC.getDate().getTime());
+                java.util.Date endDate = reportToDC.getDate();
 
                 // Check if either startDate or endDate is null
-                if (startDate == null || endDate == null) {
+                if (startDate == null && endDate == null) {
                     throw new NullPointerException("Both start and end dates must be selected.");
+                } else if (startDate == null) {
+                    throw new NullPointerException("Start date must be selected.");
+                } else if (endDate == null) {
+                    throw new NullPointerException("End date must be selected.");
                 }
 
+                // Convert the dates to java.sql.Date if needed for your ViewModel
+                java.sql.Date sqlStartDate = new java.sql.Date(startDate.getTime());
+                java.sql.Date sqlEndDate = new java.sql.Date(endDate.getTime());
+
                 // Proceed with retrieving costs from the ViewModel
-                vm.getCosts(startDate, endDate);
+                vm.getCosts(sqlStartDate, sqlEndDate);
             } catch (NullPointerException e) {
-                displayMSG("Date can't be empty.", "ERROR", JOptionPane.CANCEL_OPTION);
+                String errorMessage = e.getMessage();
+                if (errorMessage != null && !errorMessage.isEmpty()) {
+                    displayMSG(errorMessage, "ERROR", JOptionPane.CANCEL_OPTION);
+                } else {
+                    displayMSG("An unknown error occurred.", "ERROR", JOptionPane.CANCEL_OPTION);
+                }
             }
+
         }
     }
 

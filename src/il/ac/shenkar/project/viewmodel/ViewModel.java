@@ -80,12 +80,19 @@ public class ViewModel implements IViewModel {
         service.submit(() -> {
             try {
                 model.addCost(sum, currency, categoryName, description, date);
-                view.displayMSG("The cost has been added successfully.", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                // Use SwingUtilities.invokeLater to update the UI on the EDT
+                SwingUtilities.invokeLater(() -> {
+                    view.displayMSG("The cost has been added successfully.", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                });
             } catch (CostsManagerDAOException e) {
                 e.printStackTrace();
-                view.displayMSG("Error adding cost. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                // Use SwingUtilities.invokeLater to update the UI on the EDT
+                SwingUtilities.invokeLater(() -> {
+                    view.displayMSG("Error adding cost. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                });
             }
         });
+
     }
 
     /**
@@ -100,12 +107,20 @@ public class ViewModel implements IViewModel {
         service.submit(() -> {
             try {
                 List<Cost> list = model.getCosts(start, end);
-                view.setCosts(list);
+                // Use SwingUtilities.invokeLater to update the UI on the EDT
+                SwingUtilities.invokeLater(() -> {
+                    view.setCosts(list);
+                });
             } catch (CostsManagerDAOException e) {
                 e.printStackTrace();
-                view.displayMSG("Error getting costs. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+                // Use SwingUtilities.invokeLater to display an error message in the UI on the EDT
+                SwingUtilities.invokeLater(() -> {
+                    view.displayMSG("Error getting costs. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                });
             }
         });
+
     }
 
     /**
@@ -117,11 +132,20 @@ public class ViewModel implements IViewModel {
         service.submit(() -> {
             try {
                 List<Category> list = model.getCategories();
-                view.setCategories(list);
+                // Use SwingUtilities.invokeLater to update the UI on the EDT
+                SwingUtilities.invokeLater(() -> {
+                    view.setCategories(list);
+                });
+
             } catch (CostsManagerDAOException e) {
                 e.printStackTrace();
-                view.displayMSG("Error getting categories. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+                // Use SwingUtilities.invokeLater to display an error message in the UI on the EDT
+                SwingUtilities.invokeLater(() -> {
+                    view.displayMSG("Error getting categories. Try again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                });
             }
         });
+
     }
 }

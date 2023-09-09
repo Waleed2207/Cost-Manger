@@ -13,28 +13,30 @@ import javax.swing.*;
  */
 public class Main {
     /**
-     * Main function of the application
-     * @param args
+     * Main function of the application.
+     *
+     * @param args Command-line arguments (not used in this application).
      */
     public static void main(String[] args) {
-        try{
+        try {
             IModel model = new Model();
             IViewModel vm = new ViewModel();
-            // run the view in the proper thread
+            // Run the view in the proper thread
             SwingUtilities.invokeLater(() -> {
                 IView view = new View();
                 view.start();
-                // set the ViewModel in the view
+                // Set the ViewModel in the view
                 view.setViewModel(vm);
-                // set the model and view in ViewModel
+                // Set the model and view in ViewModel
                 vm.setModel(model);
                 vm.setView(view);
-                // sync the categories in the view with the categories in the database
+                // Sync the categories in the view with the categories in the database
                 view.syncCategories();
             });
-        } catch (CostsManagerDAOException | ClassNotFoundException e){
+        } catch (CostsManagerDAOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
     }
 }
 

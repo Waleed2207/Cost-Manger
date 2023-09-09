@@ -69,10 +69,8 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
                 statement.executeUpdate("INSERT INTO categories (name) VALUES ('Food')");
                 statement.executeUpdate("INSERT INTO categories (name) VALUES ('School')");
             }
-
             // Close previous ResultSet
             rs.close();
-
             // Check if 'costs' table exists
             rs = dbm.getTables(null, null, "COSTS", null);
             if (!rs.next()) {
@@ -115,18 +113,29 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
      * @throws CostsManagerDAOException If there is an error adding the category.
      */
     @Override
-    public void addCategory(Category category) throws CostsManagerDAOException {
-        try(Connection connection = DriverManager.getConnection(connectionString);
+    public void addCategory(Category category) throws CostsManagerDAOException {try (Connection connection = DriverManager.getConnection(connectionString);
+         PreparedStatement checkStatement = connection.prepareStatement("SELECT 1 FROM categories WHERE name = ?");
+         PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO categories (name) VALUES (?)")) {
 
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO categories (name) VALUES(?)")){
-            if(getCategoryByName(category.getName()) != null) {
+        // Check if the category already exists
+        checkStatement.setString(1, category.getName());
+        try (ResultSet resultSet = checkStatement.executeQuery()) {
+            if (resultSet.next()) {
                 throw new CostsManagerDAOException("Category already exists");
             }
-            statement.setString(1, category.getName());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new CostsManagerDAOException("Error connecting to database", e);
         }
+
+        // Insert the new category
+        insertStatement.setString(1, category.getName());
+        int rowsInserted = insertStatement.executeUpdate();
+        if (rowsInserted != 1) {
+            throw new CostsManagerDAOException("Category insertion failed");
+        }
+
+    } catch (SQLException e) {
+        throw new CostsManagerDAOException("Error connecting to the database or executing SQL", e);
+    }
+
     }
     /**
      * Retrieves a list of all categories from the database.
@@ -137,16 +146,23 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
     @Override
     public List<Category> getCategories() throws CostsManagerDAOException {
         List<Category> list = new LinkedList<>();
-        try(Connection connection = DriverManager.getConnection(connectionString);
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM categories ORDER BY id");
-            ResultSet rs = statement.executeQuery()){
-            while(rs.next()){
-                list.add(new Category(rs.getInt("id"), rs.getString("name")));
+        try (Connection connection = DriverManager.getConnection(connectionString);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM categories ORDER BY id");
+             ResultSet rs = statement.executeQuery()) {
+
+            while (rs.next()) {
+                int categoryId = rs.getInt("id");
+                String categoryName = rs.getString("name");
+                Category category = new Category(categoryId, categoryName);
+                list.add(category);
             }
+
         } catch (SQLException e) {
-            throw new CostsManagerDAOException("Error connecting to database", e);
+            throw new CostsManagerDAOException("Error connecting to the database or executing SQL", e);
         }
+
         return list;
+
     }
     /**
      * Retrieves a category by its name from the database.
@@ -187,17 +203,24 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
      */
     @Override
     public void addCost(Cost cost) throws CostsManagerDAOException {
-        try(Connection connection = DriverManager.getConnection(connectionString);
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO costs (category_id, total, currency, description, date) VALUES(?, ?, ?, ?, ?)")){
+        try (Connection connection = DriverManager.getConnection(connectionString);
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO costs (category_id, total, currency, description, date) VALUES (?, ?, ?, ?, ?)")) {
+
             statement.setInt(1, cost.getCategoryId());
             statement.setFloat(2, cost.getSum());
             statement.setString(3, cost.getCurrency());
             statement.setString(4, cost.getDescription());
-            statement.setDate(5, cost.getDate());
-            statement.executeUpdate();
+            statement.setDate(5, new java.sql.Date(cost.getDate().getTime())); // Convert Java Date to SQL Date
+            int rowsInserted = statement.executeUpdate();
+
+            if (rowsInserted != 1) {
+                throw new CostsManagerDAOException("Failed to insert cost record");
+            }
+
         } catch (SQLException e) {
-            throw new CostsManagerDAOException("Error connecting to database", e);
+            throw new CostsManagerDAOException("Error connecting to the database or executing SQL", e);
         }
+
     }
     /**
      * Retrieves a list of costs within a specified date range from the database.
@@ -209,19 +232,31 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
      */
     @Override
     public List<Cost> getCosts(Date start, Date end) throws CostsManagerDAOException {
-        ResultSet rs = null;
+
         String query = "SELECT costs.*, categories.name as category_name FROM costs JOIN categories ON costs.category_id = categories.id WHERE costs.date >= ? AND costs.date <= ?";
         List<Cost> list = new LinkedList<>();
-        try(Connection connection = DriverManager.getConnection(connectionString);
-            PreparedStatement statement = connection.prepareStatement(query)){
+        try (Connection connection = DriverManager.getConnection(connectionString);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
             statement.setDate(1, start);
             statement.setDate(2, end);
-            rs = statement.executeQuery();
-            while(rs.next()){
-                list.add(new Cost(rs.getInt("id"), rs.getInt("category_id"), rs.getString("category_name"), rs.getFloat("total"), rs.getString("currency"), rs.getString("description"), rs.getDate("date")));
+
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    int costId = rs.getInt("id");
+                    int categoryId = rs.getInt("category_id");
+                    String categoryName = rs.getString("category_name");
+                    float total = rs.getFloat("total");
+                    String currency = rs.getString("currency");
+                    String description = rs.getString("description");
+                    Date date = rs.getDate("date");
+
+                    Cost cost = new Cost(costId, categoryId, categoryName, total, currency, description, date);
+                    list.add(cost);
+                }
             }
         } catch (SQLException e) {
-            throw new CostsManagerDAOException("Error connecting to database", e);
+            throw new CostsManagerDAOException("Error connecting to the database or executing SQL", e);
         }
         return list;
     }

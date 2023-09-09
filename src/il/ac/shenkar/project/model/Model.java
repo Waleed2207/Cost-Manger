@@ -70,6 +70,8 @@ public class Model implements IModel {
         if (category != null) {
             Cost newCost = new Cost(category.getId(), sum, currency, description, date);
             costsManagerDB.addCost(newCost);
+        } else {
+            throw new CostsManagerDAOException("Category not found");
         }
     }
 }
