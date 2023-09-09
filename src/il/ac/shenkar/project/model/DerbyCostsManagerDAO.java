@@ -11,12 +11,11 @@ import java.util.logging.Logger;
  */
 
 public class DerbyCostsManagerDAO implements ICostsManagerDAO {
- //   private final String connectionString = "jdbc:derby://localhost:1527/CostManager;create=true";
     /**
      *  JDBC connection string for Derby database
      */
     private final String connectionString = "jdbc:derby:Costs-ManagerDB;create=true";
-        private static final Logger logger = Logger.getLogger(DerbyCostsManagerDAO.class.getName());
+    private static final Logger logger = Logger.getLogger(DerbyCostsManagerDAO.class.getName());
 
 
     /**
@@ -33,6 +32,7 @@ public class DerbyCostsManagerDAO implements ICostsManagerDAO {
      */
     private void loadDriverClassName(){
         try {
+
             String driver = "org.apache.derby.jdbc.EmbeddedDriver";
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
