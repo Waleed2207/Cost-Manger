@@ -1,7 +1,5 @@
 package il.ac.shenkar.project.model;
-
 import il.ac.shenkar.project.CostsManagerDAOException;
-
 import java.sql.Date;
 import java.util.List;
 

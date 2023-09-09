@@ -88,6 +88,12 @@ public class View implements IView {
      * scroll pane in the report panel
      */
     private JScrollPane reportTASP;
+    /**
+     * Adjust this to your preferred width
+     *  Adjust this to your preferred height
+     */
+    private int frameWidth = 800;
+    private int frameHeight = 800;
 
     /**
      * constructor to initialize all elements
@@ -247,8 +253,7 @@ public class View implements IView {
         mainFrame.add(mainPanel);
         mainFrame.pack();
         // Define the desired width and height
-        int frameWidth = 800; // Adjust this to your preferred width
-        int frameHeight = 800; // Adjust this to your preferred height
+
 
         mainFrame.setSize(frameWidth, frameHeight);
         // Center the frame on the screen (optional)
@@ -265,6 +270,7 @@ public class View implements IView {
      *
      * @return A JLabel with a custom title and icon.
      */
+
     private static JLabel getjLabel() {
         // Load the icon from the specified image file path
         ImageIcon icon = new ImageIcon("./budget.png");

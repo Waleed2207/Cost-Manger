@@ -1,5 +1,4 @@
 package il.ac.shenkar.project.model;
-
 import java.sql.Date;
 
 /**

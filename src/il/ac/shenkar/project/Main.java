@@ -5,9 +5,8 @@ import il.ac.shenkar.project.view.IView;
 import il.ac.shenkar.project.view.View;
 import il.ac.shenkar.project.viewmodel.IViewModel;
 import il.ac.shenkar.project.viewmodel.ViewModel;
-
-
 import javax.swing.*;
+
 
 /**
  * Main application class to run the main
@@ -33,10 +32,9 @@ public class Main {
                 // sync the categories in the view with the categories in the database
                 view.syncCategories();
             });
-        }catch (CostsManagerDAOException | ClassNotFoundException e){
+        } catch (CostsManagerDAOException | ClassNotFoundException e){
             e.printStackTrace();
         }
-
     }
 }
 

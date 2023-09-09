@@ -1,8 +1,6 @@
 package il.ac.shenkar.project.viewmodel;
-
 import il.ac.shenkar.project.model.IModel;
 import il.ac.shenkar.project.view.IView;
-
 import java.sql.Date;
 
 /**

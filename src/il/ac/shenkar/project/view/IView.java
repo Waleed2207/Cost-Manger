@@ -1,9 +1,7 @@
 package il.ac.shenkar.project.view;
-
 import il.ac.shenkar.project.model.Category;
 import il.ac.shenkar.project.model.Cost;
 import il.ac.shenkar.project.viewmodel.IViewModel;
-
 import java.util.List;
 
 /**

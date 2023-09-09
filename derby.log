@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Thu Sep 07 13:58:37 IDT 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-018a-6f4b-42a6-00000faac918 
-on database directory /Users/waleedjohjah/Documents/ShenkarCollege/ThirdYear/java/Cost-Manager/costs-managerDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7e32c033 
-Loaded from file:/Users/waleedjohjah/Documents/ShenkarCollege/ThirdYear/java/Cost-Manager/out/artifacts/CostManager_jar/CostManager.jar
+Sat Sep 09 15:00:40 IDT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-018a-79d0-c8ea-00000f91a1c0 
+on database directory /Users/waleedjohjah/Documents/ShenkarCollege/ThirdYear/java/Cost-Manager/costs-managerDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a 
+Loaded from file:/Users/waleedjohjah/Documents/ShenkarCollege/ThirdYear/java/Cost-Manager/libs/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=20.0.2+9-78
 user.dir=/Users/waleedjohjah/Documents/ShenkarCollege/ThirdYear/java/Cost-Manager
