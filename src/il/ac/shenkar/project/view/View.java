@@ -1,10 +1,8 @@
 package il.ac.shenkar.project.view;
-
 import com.toedter.calendar.JDateChooser;
 import il.ac.shenkar.project.model.Category;
 import il.ac.shenkar.project.model.Cost;
 import il.ac.shenkar.project.viewmodel.IViewModel;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -13,7 +11,6 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-
 import java.awt.event.ActionListener;
 
 public class View implements IView {
@@ -358,6 +355,7 @@ public class View implements IView {
         } else {
             SwingUtilities.invokeLater(() -> {
                 updateCategories(categories);
+
             });
         }
     }
