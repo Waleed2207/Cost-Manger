@@ -2,9 +2,9 @@ package il.ac.shenkar.project.model;
 import java.sql.Date;
 import java.util.List;
 
-/**
- * Model interface for interacting with the Costs Manager.
- */
+    /**
+     * Model interface for interacting with the Costs Manager.
+     */
 public interface IModel {
     /**
      * Get a list of categories from the data access object (DAO).

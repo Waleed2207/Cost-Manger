@@ -9,9 +9,9 @@ import il.ac.shenkar.project.viewmodel.ViewModel;
 import javax.swing.*;
 
 
-/**
- * Main application class to run the main
- */
+    /**
+     * Main application class to run the main
+     */
 public class Main {
     /**
      * Main function of the application.

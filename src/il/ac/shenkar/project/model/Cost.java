@@ -1,9 +1,9 @@
 package il.ac.shenkar.project.model;
 import java.sql.Date;
 
-/**
- * Cost class to represent cost object in database
- */
+    /**
+     * Cost class to represent cost object in database
+     */
 public class Cost {
     /**
      * The ID of the cost.

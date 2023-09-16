@@ -2,9 +2,9 @@ package il.ac.shenkar.project.model;
 import java.sql.Date;
 import java.util.List;
 
-/**
- * The Model class represents the logic of the MVVM architecture.
- */
+    /**
+     * The Model class represents the logic of the MVVM architecture.
+     */
 public class Model implements IModel {
     /**
      * Reference to the Data Access Object (DAO).

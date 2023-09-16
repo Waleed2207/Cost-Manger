@@ -3,9 +3,9 @@ import il.ac.shenkar.project.model.IModel;
 import il.ac.shenkar.project.view.IView;
 import java.sql.Date;
 
-/**
- * ViewModel interface to facilitate communication between the view and model.
- */
+    /**
+     * ViewModel interface to facilitate communication between the view and model.
+     */
 public interface IViewModel {
     /**
      * Sets the model for the ViewModel.

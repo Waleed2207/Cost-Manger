@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Database access object implemented for Derby Database.
- */
+    /**
+     * Database access object implemented for Derby Database.
+     */
 
 public class DerbyCostsManagerDAO implements ICostsManagerDAO {
     /**

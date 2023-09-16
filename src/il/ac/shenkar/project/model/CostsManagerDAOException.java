@@ -1,8 +1,8 @@
 package il.ac.shenkar.project.model;
 
-/**
- * Custom exception class for the project.
- */
+    /**
+     * Custom exception class for the project.
+     */
 public class CostsManagerDAOException extends Exception {
 
     /**

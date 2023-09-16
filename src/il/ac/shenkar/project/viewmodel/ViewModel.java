@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * ViewModel implementation
- */
+    /**
+     * ViewModel implementation
+     */
 public class ViewModel implements IViewModel {
     private IModel model; // Model reference
     private IView view;   // View reference

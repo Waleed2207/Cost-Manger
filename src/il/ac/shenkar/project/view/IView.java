@@ -4,9 +4,9 @@ import il.ac.shenkar.project.model.Cost;
 import il.ac.shenkar.project.viewmodel.IViewModel;
 import java.util.List;
 
-/**
- * The View interface defines methods for the user interface to interact with the application.
- */
+    /**
+     * The View interface defines methods for the user interface to interact with the application.
+     */
 public interface IView {
     /**
      * Sets the ViewModel reference for the view.

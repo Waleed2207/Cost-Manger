@@ -1,8 +1,8 @@
 package il.ac.shenkar.project.model;
 
-/**
- * Category class to represent a category object in the database.
- */
+    /**
+     * Category class to represent a category object in the database.
+     */
 public class Category {
     /**
      * The ID of the category.
