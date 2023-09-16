@@ -1,4 +1,4 @@
-package il.ac.shenkar.project;
+package il.ac.shenkar.project.model;
 
 /**
  * Custom exception class for the project.

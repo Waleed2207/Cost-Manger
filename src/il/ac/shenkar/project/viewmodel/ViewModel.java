@@ -1,5 +1,5 @@
 package il.ac.shenkar.project.viewmodel;
-import il.ac.shenkar.project.CostsManagerDAOException;
+import il.ac.shenkar.project.model.CostsManagerDAOException;
 import il.ac.shenkar.project.model.Category;
 import il.ac.shenkar.project.model.Cost;
 import il.ac.shenkar.project.model.IModel;

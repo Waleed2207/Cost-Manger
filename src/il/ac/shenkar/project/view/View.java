@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -270,19 +271,21 @@ public class View implements IView {
 
     private static JLabel getjLabel() {
         // Load the icon from the specified image file path
-        ImageIcon icon = new ImageIcon("./budget.png");
+        String imagePath = "images/budget.png";
+        ImageIcon icon = new ImageIcon(imagePath);
 
         // Create a JLabel with a custom HTML-formatted title
         JLabel titleLabel = new JLabel("<html><font color='#2C4F87'><b>Cost Manager</b></font></html>", SwingConstants.LEFT);
 
-        // Set the font and style for the title label
+       // Set the font and style for the title label
         titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 35.0F));
 
-        // Set the text color to blue for the title label
+       // Set the text color to blue for the title label
         titleLabel.setForeground(Color.BLUE);
 
         // Set the loaded icon for the titleLabel
         titleLabel.setIcon(icon);
+
 
         // Return the created and configured titleLabel
         return titleLabel;
