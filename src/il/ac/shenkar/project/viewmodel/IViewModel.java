@@ -6,6 +6,7 @@ import java.sql.Date;
     /**
      * ViewModel interface to facilitate communication between the view and model.
      */
+
 public interface IViewModel {
     /**
      * Sets the model for the ViewModel.

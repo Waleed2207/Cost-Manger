@@ -159,8 +159,7 @@ public class View implements IView {
         // Set the background color for reportPanel
         reportPanel.setBackground(Color.LIGHT_GRAY);
         // Set the background color for titlePanel
-        titlePanel.setBackground(Color.LIGHT_GRAY); // For example, you can choose any color you prefer
-        // You can set background colors for other components as needed
+        titlePanel.setBackground(Color.LIGHT_GRAY);
         mainPanel.setLayout(boxlayout);
 
         // Assuming you have an ImageIcon object named 'icon' representing your desired icon

@@ -5,6 +5,7 @@ import java.util.List;
     /**
      * Model interface for interacting with the Costs Manager.
      */
+
 public interface IModel {
     /**
      * Get a list of categories from the data access object (DAO).

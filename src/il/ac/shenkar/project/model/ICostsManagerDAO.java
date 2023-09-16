@@ -5,6 +5,7 @@ import java.util.List;
     /**
      * Interface for the Costs Manager Data Access Object (DAO).
      */
+
 public interface ICostsManagerDAO {
     /**
      * Add a new category to the database.

@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Fri Sep 15 15:09:07 IDT 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-018a-98be-ad60-00000f91fe08
-on database directory /Users/waleedjohjah/Documents/ShenkarCollege/ThirdYear/java/Cost-Manager/costs-managerDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
-Loaded from file:/Users/waleedjohjah/Documents/ShenkarCollege/ThirdYear/java/Cost-Manager/libs/derby.jar
+Sun Sep 17 02:05:11 IDT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-018a-a03d-aea5-000007308da8 
+on database directory C:\Users\click\Documents\Software Engnieer\Cost-Manger\Costs-ManagerDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2f0e140b 
+Loaded from file:/C:/Users/click/Documents/Software%20Engnieer/Cost-Manger/libs/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=20.0.2+9-78
-user.dir=/Users/waleedjohjah/Documents/ShenkarCollege/ThirdYear/java/Cost-Manager
-os.name=Mac OS X
-os.arch=aarch64
-os.version=13.5.1
+java.runtime.version=19.0.1+10-21
+user.dir=C:\Users\click\Documents\Software Engnieer\Cost-Manger
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

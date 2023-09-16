@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
     /**
      * ViewModel implementation
      */
+
 public class ViewModel implements IViewModel {
     private IModel model; // Model reference
     private IView view;   // View reference
