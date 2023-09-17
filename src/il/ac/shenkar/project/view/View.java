@@ -7,12 +7,12 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class View implements IView {
     /**
@@ -268,10 +268,10 @@ public class View implements IView {
      * @return A JLabel with a custom title and icon.
      */
 
-    private static JLabel getjLabel() {
+    private  JLabel getjLabel() {
         // Load the icon from the specified image file path
-        String imagePath = "images/budget.png";
-        ImageIcon icon = new ImageIcon(imagePath);
+        String imagePath = "/il/ac/shenkar/project/images/budget.png";
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(imagePath)));
 
         // Create a JLabel with a custom HTML-formatted title
         JLabel titleLabel = new JLabel("<html><font color='#2C4F87'><b>Cost Manager</b></font></html>", SwingConstants.LEFT);
