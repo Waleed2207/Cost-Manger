@@ -309,6 +309,7 @@ public class View implements IView {
                     cost.getDescription() + "\n";
         }
 
+
         reportTA.setText(table);
     }
 
